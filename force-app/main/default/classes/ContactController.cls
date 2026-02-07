@@ -5,10 +5,10 @@ public with sharing class ContactController {
             SELECT Id, Name, Email, AppointmentDate__c
             FROM Contact
             WHERE Name LIKE : '%' + searchText + '%'
+            OR Email LIKE : '%' + searchText + '%'
             WITH SECURITY_ENFORCED
             ORDER BY Name ASC
-            LIMIT 50
-            
+            LIMIT 25    
         ];         
         }
 }
