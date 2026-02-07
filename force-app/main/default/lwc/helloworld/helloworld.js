@@ -1,14 +1,15 @@
-import {
-  LightningElement,
-  track,
-  wire
-}
-from 'lwc';
+import {LightningElement, track, wire} from 'lwc';
 import getContacts from '@salesforce/apex/ContactController.getContacts';
+import sendEmailToContact from '@salesforce/apex/ContactController.getContacts';
+import { NavigationMixin } from 'lightning/navigation';
 export
-default class HelloWorld extends LightningElement {@track searchKey = '';@track contacts = [];@track selectedContacts = [];
+default class HelloWorld extends NavigationMixin(LightningElement) {
+    @track searchKey = '';
+    @track contacts = [];
+    @track selectedContacts = [];
     //recordLink;
-    @track showFlowModal = false;@track flowInputVariables = [];
+    @track showFlowModal = false;
+    @track flowInputVariables = [];
 
     columns = [
     {
@@ -43,12 +44,8 @@ default class HelloWorld extends LightningElement {@track searchKey = '';@track 
       this.searchKey = event.target.value;
     }
 
-    @wire(getContacts, {
-      searchText: '$searchKey'
-    }) wiredContacts({
-      error,
-      data
-    }) {
+    @wire(getContacts, {searchText: '$searchKey'}) 
+    wiredContacts({error, data }) {
       if (data) {
         this.contacts = data.map(c => {
           return {...c,
@@ -71,6 +68,33 @@ default class HelloWorld extends LightningElement {@track searchKey = '';@track 
         this.openFlowModal(row.Id); // ← your modal function
       }
     }
+
+    selectedContactId;
+
+    handleRowSelection(event) {
+        const selected = event.detail.selectedRows;  
+        this.selectedContactId = selected.length === 1 ? selected[0].Id : null;
+        console.log(this.selectedContactId);
+    }
+
+     openEmailComposer() {
+        if (!this.selectedContactId) {
+            alert('Please select a contact first.');
+            return;
+        }
+
+        else
+        this[NavigationMixin.Navigate]({
+            type: 'standard__quickAction',
+            attributes: {
+                apiName: 'Global.SendEmail'
+            },
+            state: {
+                recordId: this.selectedContactId
+            }
+        });
+    }
+
     
     openFlowModal(contactId) {
       this.flowInputVariables = [{

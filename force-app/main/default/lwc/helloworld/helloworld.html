@@ -13,14 +13,22 @@
         <div class="spacing">
             <template if:true={contacts}>
                 <lightning-datatable
-                    hide-checkbox-column="true"
+                    max-row-selection="1"
                     key-field="Id"
                     data={contacts}
                     columns={columns}
-                    onrowaction={handleRowAction}>               
+                    onrowaction={handleRowAction}
+                    onrowselection={handleRowSelection}>               
                 </lightning-datatable>
             </template>
         </div>
+
+    <lightning-button
+         label="Send Email"
+         variant="brand"
+         onclick={openEmailComposer}>
+    </lightning-button>
+
     </div>
 
     <template if:true={showFlowModal}>
