@@ -3,34 +3,20 @@
         <div class="slds-p-around_medium">
             <lightning-input 
                 type="text" 
-                label="Search Contacts"
+                label="Search Contact Name"
+                placeholder="Enter a name to search"
                 value={searchKey}
                 onchange={handleChange}>
             </lightning-input>
 
-            <p>Contact List:</p>
             <template if:true={contacts}>
                 <lightning-datatable
+                    hide-checkbox-column="true"
                     key-field="Id"
                     data={contacts}
-                    columns={columns}
-                    onrowselection={handleRowSelection}>               
+                    columns={columns}>               
                 </lightning-datatable>
             </template>
-
-            <template if:true={selectedContacts}>
-                <h3 class="slds-m-top_medium">Selected Contacts: </h3>
-                <template for:each={selectedContacts} for:item="c">
-                    <p key={c.Id} value={c.Name}>{c.Name}</p>
-                </template>
-            </template>
-
-            <lightning-button 
-              variant="base"
-              label="Check Contacts" 
-              onclick={handleClick} 
-            ></lightning-button>
-
         </div>
     </lightning-card>
 </template>
