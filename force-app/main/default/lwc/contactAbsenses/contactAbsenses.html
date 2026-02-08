@@ -5,13 +5,20 @@
         <template if:true={absenses}>
           <template if:true={absenses.length}>
             <h2 class="subtitle">
-              Today's Absenses
+              Absenses
             </h2>
-            <template for:each={absenses} for:item="c">
-              <p key={c.Id}>
-                ❌ {c.Contact__r.Name}
-              </p>
-            </template>
+            <lightning-combobox name="dateFilter" label="Filter Absences" value={selectedValue}
+            placeholder="Select a range" options={options} onchange={handleFilterChange}>
+            </lightning-combobox>
+            <div class='spacing2'>
+              <template for:each={absenses} for:item="a">
+                <p key={a.Id}>
+                  <a href={a.absenseLink} target="_blank">
+                    ❌{a.Contact__r.Name} - {a.Absense_Date__c}
+                  </a>
+                </p>
+              </template>
+            </div>
           </template>
           <template if:false={absenses.length}>
             <p>

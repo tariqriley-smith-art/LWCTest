@@ -1,61 +1,51 @@
 <template>
-    <lightning-card>
-        <div class="slds-p-around_medium">
-            <h1 class="title">Update Contact Appointment Date</h1>
-            <div class="spacing">
-            <lightning-input 
-                type="text" 
-                placeholder="Enter a name to search"
-                value={searchKey}
-                onchange={handleChange}>
-            </lightning-input>
-            </div>
-        <div class="spacing">
-            <template if:true={contacts}>
-                <lightning-datatable
-                    max-row-selection="1"
-                    key-field="Id"
-                    data={contacts}
-                    columns={columns}
-                    onrowaction={handleRowAction}
-                    onrowselection={handleRowSelection}>               
-                </lightning-datatable>
-            </template>
-        </div>
-
-    <lightning-button
-         label="Send Email"
-         variant="brand"
-         onclick={openEmailComposer}>
-    </lightning-button>
-
+  <lightning-card>
+    <div class="slds-p-around_medium">
+      <h1 class="title">
+        UPDATE CONTACT APPOINTMENT DATE
+      </h1>
+      <div class="spacing">
+        <lightning-input type="text" placeholder="Enter a name to search" value={searchKey}
+        onchange={handleChange}>
+        </lightning-input>
+      </div>
+      <div class="spacing">
+        <template if:true={contacts}>
+          <lightning-datatable max-row-selection="1" key-field="Id" data={contacts}
+          columns={columns} onrowaction={handleRowAction} onrowselection={handleRowSelection}>
+          </lightning-datatable>
+        </template>
+      </div>
+      <lightning-button label="Send Email" variant="brand" onclick={openEmailComposer}>
+      </lightning-button>
+      <lightning-button class="newAbsenseAction" label="Create Contact Absense"
+      variant="brand" onclick={openCreateQuickAction}>
+      </lightning-button>
+      <lightning-button class="newAbsenseAction" label="Create Case" variant="brand"
+      onclick={createCase}>
+      </lightning-button>
     </div>
-
     <template if:true={showFlowModal}>
-        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-
-                <header class="slds-modal__header">
-                    <h2 class="subtitle">Update Contact Appointment Date</h2>
-                </header>
-
-                <div class="slds-modal__content slds-p-around_medium">
-                    <lightning-flow
-                        flow-api-name="Contact_Update_Contact_Appointment_Date"
-                        flow-input-variables={flowInputVariables}
-                        onstatuschange={handleFlowStatusChange}>
-                    </lightning-flow>
-                </div>
-
-                <footer class="slds-modal__footer">
-                    <lightning-button label="Close" onclick={closeFlowModal}></lightning-button>
-                </footer>
-
-            </div>
-        </section>
-
-        <div class="slds-backdrop slds-backdrop_open"></div>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <h2 class="subtitle">
+              Update Contact Appointment Date
+            </h2>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium">
+            <lightning-flow flow-api-name="Contact_Update_Contact_Appointment_Date"
+            flow-input-variables={flowInputVariables} onstatuschange={handleFlowStatusChange}>
+            </lightning-flow>
+          </div>
+          <footer class="slds-modal__footer">
+            <lightning-button label="Close" onclick={closeFlowModal}>
+            </lightning-button>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open">
+      </div>
     </template>
-
   </lightning-card>
 </template>
