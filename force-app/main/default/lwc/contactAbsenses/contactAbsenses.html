@@ -1,29 +1,30 @@
 <template>
-    <lightning-card>
-        <div class="slds-p-around_medium">
-    <template if:true={absenses}>
-        <template if:true={absenses.length}>
-            <p class="slds-text-heading_small slds-m-bottom_small">
-                Today's Absenses
-            </p>
-
+  <lightning-card>
+    <div class="spacing">
+      <div class="slds-p-around_medium">
+        <template if:true={absenses}>
+          <template if:true={absenses.length}>
+            <h2 class="subtitle">
+              Today's Absenses
+            </h2>
             <template for:each={absenses} for:item="c">
-                <p key={c.Id}>
-                   🔴 {c.Contact__r.Name}
-                </p>
+              <p key={c.Id}>
+                ❌ {c.Contact__r.Name}
+              </p>
             </template>
+          </template>
+          <template if:false={absenses.length}>
+            <p>
+              No absenses today.
+            </p>
+          </template>
         </template>
-
-        <template if:false={absenses.length}>
-            <p>No absenses today.</p>
+        <template if:true={error}>
+          <p>
+            Error loading absenses.
+          </p>
         </template>
-    </template>
-
-    <template if:true={error}>
-        <p>Error loading absenses.</p>
-    </template>
+      </div>
     </div>
-    
-    </lightning-card>
-
+  </lightning-card>
 </template>

@@ -8,7 +8,7 @@ public with sharing class ContactController {
             OR Email LIKE : '%' + searchText + '%'
             WITH SECURITY_ENFORCED
             ORDER BY Name ASC
-            LIMIT 5
+            LIMIT 4
         ];         
         }
 
@@ -36,5 +36,3 @@ public with sharing class ContactController {
 
      
         }
-
-

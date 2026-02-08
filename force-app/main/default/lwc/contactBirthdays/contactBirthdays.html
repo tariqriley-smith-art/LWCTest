@@ -1,29 +1,30 @@
 <template>
-    <lightning-card>
-        <div class="slds-p-around_medium">
-    <template if:true={birthdays}>
-        <template if:true={birthdays.length}>
-            <p class="slds-text-heading_small slds-m-bottom_small">
-                Today's Birthdays
-            </p>
-
+  <lightning-card>
+    <div class="spacing">
+      <div class="slds-p-around_medium">
+        <template if:true={birthdays}>
+          <template if:true={birthdays.length}>
+            <h2 class="subtitle">
+              Today's Birthdays
+            </h2>
             <template for:each={birthdays} for:item="c">
-                <p key={c.Id}>
-                    🎉 {c.Name}
-                </p>
+              <p key={c.Id}>
+                🎉 {c.Name}
+              </p>
             </template>
+          </template>
+          <template if:false={birthdays.length}>
+            <p>
+              No birthdays today.
+            </p>
+          </template>
         </template>
-
-        <template if:false={birthdays.length}>
-            <p>No birthdays today.</p>
+        <template if:true={error}>
+          <p>
+            Error loading birthdays.
+          </p>
         </template>
-    </template>
-
-    <template if:true={error}>
-        <p>Error loading birthdays.</p>
-    </template>
+      </div>
     </div>
-    
-    </lightning-card>
-
+  </lightning-card>
 </template>

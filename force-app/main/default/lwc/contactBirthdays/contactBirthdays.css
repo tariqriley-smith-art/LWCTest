@@ -1,0 +1,25 @@
+.spacing {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.large-spacing {
+    margin-bottom: 2rem;
+}
+
+.pad {
+    padding: 1rem;
+}
+
+.title {
+    text-align: center;
+    font-size: xx-large;
+    color: #1F5FBF;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: medium;
+    color: #1F5FBF;
+    font-weight: 500;
+}

@@ -14,5 +14,7 @@ export default class ContactBirthdays extends LightningElement {
             this.birthdays = [];
         }
     }
-}
 
+
+
+}
